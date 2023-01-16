@@ -7,10 +7,10 @@ if [[ $EUID -ne 0 ]];
    echo -e "\e[1;31mThis script must be run as root\e[0m"
    exit 1
 fi
-read -p "Installing bind9, dnsutils, apache2, vsftpd, openssh-server, dovecot-core, dovecot-imapd, samba, dhcp server, ipcalc, php, php-curl, postfix and squid proxy (y/n) : " tools
+read -p "Installing bind9, dnsutils, apache2, vsftpd, openssh-server, dovecot-core, dovecot-imapd, samba, dhcp server, ipcalc, php, php-curl, php-dom, postfix and squid proxy (y/n) : " tools
 if [[ $tools == "y" ]]
   then
-	apt install bind9 dnsutils apache2 vsftpd openssh-server dovecot-core dovecot-imapd samba squid isc-dhcp-server ipcalc php php-curl postfix
+	apt install bind9 dnsutils apache2 vsftpd openssh-server dovecot-core dovecot-imapd samba squid isc-dhcp-server ipcalc php php-curl php-dom postfix
 	printf "\e[1;32m\n[Done!!!]\e[0m\n"
 elif [[ $tools == "n" ]]
   then
@@ -79,8 +79,9 @@ echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config
 /etc/init.d/ssh restart
 printf "\e[1;32m[Done!]\e[0m\n"
 printf "\n\n"
-printf "\e[1;31mDOVECOT & POSTFIX CONFIGURATION\e[0m"
+printf "\e[1;31mDOVECOT & POSTFIX CONFIGURATION\e[0m\n"
 /etc/init.d/dovecot restart
+printf "\n"
 /etc/init.d/postfix restart
 printf "\n\n"
 printf "\e[1;31mSAMBA CONFIGURATION\e[0m\n"
